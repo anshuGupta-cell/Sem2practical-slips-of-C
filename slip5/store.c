@@ -9,20 +9,40 @@ typedef struct{
 void main () {
 	Item it[5];
 	FILE *file;
+	char ch;
 	
-	file = fopen("item.dat", "w");
-	if (!file) printf("Unable to open file item.dat");
+	
+	file = fopen("item.txt", "w");
+	if (!file) printf("Unable to open file item.txt");
 	else {
-		for(int i = 0; i < 1; i++){
-		printf("Enter item id: ");
-		scanf("%d", &it->id);
-		printf("Enter Quantity: ");
-		scanf("%d", &it->qty);
-		fwrite(&it, sizeof(it), 1, file);
+	
+		for(int i = 0; i < 5; i++){
+		
+			printf("\nEnter item id: ");
+			
+			scanf("%d", &it[i].id);
+			printf("Enter Quantity: ");
+			scanf("%d", &it[i].qty);
+			fprintf(file, "\nItem id: %d\nItem quantity: %d\n", it[i].id, it[i].qty);
 		}
 		fclose(file);
+		
+		
 		printf("\nRecords added successfully");
 	}
+	file = fopen("item.txt", "r");
+	if (!file) printf("Unable to open file item.txt");
+	else {
+		do{
+			ch = fgetc(file);
+			putchar(ch);
+		}while (ch != EOF);
+		fclose(file);
+		
+		
+		printf("\nRecords READ successfully");
+	}
+	
 }
 
 
